@@ -10,6 +10,7 @@
   "lint-staged": {
     "*.{js,json}": ["prettier --single-quote --write", "git add"]
   },
+  "license": "MIT",
   "files": ["index.js", "lib", "Licence"],
   "main": "index.js",
   "repository": {
