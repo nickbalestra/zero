@@ -17,3 +17,7 @@ test('should throw if constructed without a verify callback', () => {
   //   var s = new Strategy();
   // }).to.throw(TypeError, 'LocalStrategy requires a verify callback');
 });
+
+test('should throw if constructed without a secret option', () => {});
+
+test('should throw if constructed without a deliver option', () => {});
