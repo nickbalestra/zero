@@ -10,12 +10,6 @@ const deliver = email({
   //   subject: `Hello ${user.name}!`,
   //   text: 'Welcome!'
   // }),
-
-  // from: 'someone@balestra.ch',
-  // user: 'nick@balestra.ch',
-  // password: 'Nb1mu9sm80_p11yyy',
-  // host: 'smtp.gmail.com',
-  // port: '465'
   from: 'from@someone.com',
   user: 'to@someone.com',
   password: 'secure',
