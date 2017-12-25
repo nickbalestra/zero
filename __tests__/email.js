@@ -14,6 +14,7 @@ test('deliver API', () => {
   expect(deliver.addressField).toBe('email');
   expect(deliver.tokenField).toBe('token');
   expect(deliver.send).toBeInstanceOf(Function);
+  expect(deliver.send.length).toBe(3);
 });
 
 test('deliver.send()', async () => {
