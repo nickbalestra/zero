@@ -36,7 +36,7 @@ test('handling a request with valid credentials in body', done => {
   passport
     .use(strategy)
     .pass(result => {
-      expect(result.message).toBe('Token succesfully sent');
+      expect(result.message).toBe('Token succesfully delivered');
       done();
     })
     .req(req => {
@@ -50,7 +50,7 @@ test('handling a request with valid credentials in query', done => {
   passport
     .use(strategy)
     .pass(result => {
-      expect(result.message).toBe('Token succesfully sent');
+      expect(result.message).toBe('Token succesfully delivered');
       done();
     })
     .req(req => {
