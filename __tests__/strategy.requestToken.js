@@ -33,8 +33,9 @@ test('handling a request with valid credentials in body', done => {
       done();
     })
     .req(req => {
-      req.body = {};
-      req.body.email = 'user@domain.com';
+      req.body = {
+        email: 'user@domain.com'
+      };
     })
     .authenticate({ action: 'requestToken' });
 });
@@ -47,8 +48,9 @@ test('handling a request with valid credentials in query', done => {
       done();
     })
     .req(req => {
-      req.query = {};
-      req.query.email = 'user@domain.com';
+      req.query = {
+        email: 'user@domain.com'
+      };
     })
     .authenticate({ action: 'requestToken' });
 });
@@ -74,9 +76,9 @@ test('handling a request with valid missing credentials in query', done => {
       done();
     })
     .req(req => {
-      req.body = {};
-      req.body.email = 'user@domain.com';
-      req.query = {};
+      req.body = {
+        email: 'user@domain.com'
+      };
     })
     .authenticate({ action: 'requestToken', allowPost: false });
 });
