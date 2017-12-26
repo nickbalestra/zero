@@ -123,4 +123,47 @@ test('handling a request with expired token in body', done => {
     .authenticate({ action: 'acceptToken', allowPost: true });
 });
 
-// TBD allowReuse tests
+test('handling a request with revoked token (already used) in body', done => {
+  const token = jwt.sign({ user }, strategy.secret, {
+    expiresIn: strategy.ttl
+  });
+
+  testPassport
+    .use(strategy)
+    .success(user => {
+      expect(user).toEqual(user);
+      testPassport
+        .use(strategy)
+        .fail(info => {
+          expect(info.message).toBe('Token was already used');
+          done();
+        })
+        .req(req => {
+          req.body = {
+            token
+          };
+        })
+        .authenticate({ action: 'acceptToken', allowReuse: false });
+    })
+    .req(req => {
+      req.body = {
+        token
+      };
+    })
+    .authenticate({
+      /* defaults: action: 'acceptToken', allowReuse: false */
+    });
+});
+
+test('handling uknkown authenticate action', done => {
+  testPassport
+    .use(strategy)
+    .error(error => {
+      expect(error.message).toBe('Unknown action');
+      done();
+    })
+    .req(req => {
+      req.body = {};
+    })
+    .authenticate({ action: 'unknown' });
+});
