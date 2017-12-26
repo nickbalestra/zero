@@ -1,5 +1,5 @@
-const Strategy = require('../lib/Strategy.js');
-const tokenStorage = require('../lib/tokenStorage');
+const Strategy = require('../lib/Strategy');
+const tokenStorage = require('../lib/storage');
 
 const deliver = {
   addressField: 'email',

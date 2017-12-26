@@ -1,5 +1,5 @@
 const emailjs = require('emailjs');
-const email = require('../lib/email');
+const email = require('../lib/deliver');
 
 const smtpConfig = {
   from: 'from@domain.com',
