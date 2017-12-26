@@ -1,9 +1,17 @@
-# zero
-A passwordless inspired strategy for passport
+Zero
+==============
+
+A [passwordless](https://github.com/florianheinemann/passwordless) inspired strategy for [passport](https://github.com/jaredhanson/passport)
+
+[![Build Status](https://travis-ci.org/nickbalestra/zero.svg?branch=master)](https://travis-ci.org/nickbalestra/zero)
+[![codecov](https://codecov.io/gh/nickbalestra/zero/branch/master/graph/badge.svg)](https://codecov.io/gh/nickbalestra/zero)
+
 
 ## REPO IS 🚧 
 
-### API
+## API
+
+### BASIC
 
 Just an idea for the API (Still Flux)
 Basic setup: 
@@ -24,7 +32,6 @@ passport.use(
   verify
 ))
 
-
 // Setup route to request a token
 // ===========================================
 app.post('/auth/zero',
@@ -43,4 +50,36 @@ app.get('/',
     }
   }
 );
+```
+
+### ADVANCED
+
+#### Email deliver
+```
+const { email } = require('passport-zero');
+
+...
+deliver: email({
+  ...smtpConfig,
+  tokenField: 'acceptToken'  // default: 'token'
+  template,                  // default: defaultTemplate
+})
+...
+
+// template API
+(user, token, tokenField, req) => ({
+  to,        // default: user.email if not overriden in template
+  from,      // default to smtpConfig if not ovverriden
+  subject,   // default to 'Token for ${hostname}!'
+  text       // default to 'Hello!\nAccess your account here: ${protocol}://${hostname}/?${tokenField}=${token}`
+})
+```
+
+Custom deliver module API
+```
+{
+  async send(user, token, req){},
+  tokenField,
+  addressField,
+}
 ```
