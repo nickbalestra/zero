@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const { passport: testPassport } = require('chai').use(
   require('chai-passport-strategy')
 );
@@ -25,60 +26,101 @@ const strategy = new Strategy(
     })
 );
 
-test('', () => {});
+const user = { email: 'user@domain.com', id: 111 };
+const validIat = secsAgo => Math.floor(Date.now() / 1000) - secsAgo;
 
-// test("handling a request with valid credentials in body", done => {
-//   testPassport
-//     .use(strategy)
-//     .pass(result => {
-//       expect(result.message).toBe("Token succesfully delivered");
-//       done();
-//     })
-//     .req(req => {
-//       req.body = {};
-//       req.body.email = "user@domain.com";
-//     })
-//     .authenticate({ action: "requestToken" });
-// });
+test('handling a request with valid token in body', done => {
+  const token = jwt.sign({ user }, strategy.secret, {
+    expiresIn: strategy.ttl
+  });
 
-// test("handling a request with valid credentials in query", done => {
-//   testPassport
-//     .use(strategy)
-//     .pass(result => {
-//       expect(result.message).toBe("Token succesfully delivered");
-//       done();
-//     })
-//     .req(req => {
-//       req.query = {};
-//       req.query.email = "user@domain.com";
-//     })
-//     .authenticate({ action: "requestToken" });
-// });
+  testPassport
+    .use(strategy)
+    .success(user => {
+      expect(user).toEqual(user);
+      done();
+    })
+    .req(req => {
+      req.body = {
+        token
+      };
+    })
+    .authenticate({ action: 'acceptToken', allowReuse: true });
+});
 
-// test("handling a request with valid missing credentials in body", done => {
-//   testPassport
-//     .use(strategy)
-//     .fail(result => {
-//       expect(result.message).toBe("Missing email");
-//       done();
-//     })
-//     .req(req => {
-//       req.body = {};
-//     })
-//     .authenticate({ action: "requestToken" });
-// });
+test('handling a request with valid token in query', done => {
+  const token = jwt.sign({ user }, strategy.secret, {
+    expiresIn: strategy.ttl
+  });
 
-// test("handling a request with valid missing credentials in query", done => {
-//   testPassport
-//     .use(strategy)
-//     .fail(result => {
-//       expect(result.message).toBe("Missing email");
-//       done();
-//     })
-//     .req(req => {
-//       req.body = {};
-//       req.body.email = "user@domain.com";
-//       req.query = {};
-//     })
-//     .authenticate({ action: "requestToken", allowPost: false });
-// });
+  testPassport
+    .use(strategy)
+    .success(user => {
+      expect(user).toEqual(user);
+      done();
+    })
+    .req(req => {
+      req.query = {
+        token
+      };
+    })
+    .authenticate({
+      action: 'acceptToken',
+      allowPost: false,
+      allowReuse: true
+    });
+});
+
+test('handling a request with missing token in query', done => {
+  const token = jwt.sign({ user }, strategy.secret, {
+    expiresIn: strategy.ttl
+  });
+
+  testPassport
+    .use(strategy)
+    .pass(info => {
+      expect(info.message).toBe('No token found in token');
+      done();
+    })
+    .req(req => {
+      req.query = {};
+    })
+    .authenticate({ action: 'acceptToken', allowPost: false });
+});
+
+test('handling a request with missing token in body', done => {
+  const token = jwt.sign({ user }, strategy.secret, {
+    expiresIn: strategy.ttl
+  });
+
+  testPassport
+    .use(strategy)
+    .pass(info => {
+      expect(info.message).toBe('No token found in token');
+      done();
+    })
+    .req(req => {
+      req.body = {};
+    })
+    .authenticate({ action: 'acceptToken', allowPost: true });
+});
+
+test('handling a request with expired token in body', done => {
+  const token = jwt.sign({ user, iat: validIat(60) }, strategy.secret, {
+    expiresIn: 30
+  });
+  testPassport
+    .use(strategy)
+    .error(result => {
+      expect(result.message).toBe('jwt expired');
+      done();
+    })
+    .req(req => {
+      req.body = {
+        token
+      };
+    })
+    .authenticate({ action: 'acceptToken', allowPost: true });
+});
+
+// TBD allowReuse tests
