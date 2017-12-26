@@ -2,7 +2,7 @@ const { passport: testPassport } = require('chai').use(
   require('chai-passport-strategy')
 );
 
-const email = require('../lib/email');
+const email = require('../lib/deliver');
 const Strategy = require('../lib/Strategy');
 
 const strategy = new Strategy(

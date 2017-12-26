@@ -1,4 +1,4 @@
-const storage = require('../lib/tokenStorage');
+const storage = require('../lib/storage');
 
 test('storage API', () => {
   ['get', 'set', 'delete'].forEach(method => {
