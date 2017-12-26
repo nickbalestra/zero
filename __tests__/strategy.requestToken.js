@@ -1,21 +1,14 @@
-const chai = require('chai');
-chai.use(require('chai-passport-strategy'));
-const { passport } = chai;
+const { passport: testPassport } = require('chai').use(
+  require('chai-passport-strategy')
+);
 
 const email = require('../lib/email');
 const Strategy = require('../lib/Strategy');
+
 const strategy = new Strategy(
   {
     secret: 'top-secret',
     deliver: email({})
-    // deliver: {
-    //   addressField: "email",
-    //   async send(user, token, request) {
-    //     setTimeout(() => {
-    //       return "done";
-    //     }, 200);
-    //   }
-    // }
   },
   async address =>
     new Promise((resolve, reject) => {
@@ -33,7 +26,7 @@ const strategy = new Strategy(
 );
 
 test('handling a request with valid credentials in body', done => {
-  passport
+  testPassport
     .use(strategy)
     .pass(result => {
       expect(result.message).toBe('Token succesfully delivered');
@@ -47,7 +40,7 @@ test('handling a request with valid credentials in body', done => {
 });
 
 test('handling a request with valid credentials in query', done => {
-  passport
+  testPassport
     .use(strategy)
     .pass(result => {
       expect(result.message).toBe('Token succesfully delivered');
@@ -61,7 +54,7 @@ test('handling a request with valid credentials in query', done => {
 });
 
 test('handling a request with valid missing credentials in body', done => {
-  passport
+  testPassport
     .use(strategy)
     .fail(result => {
       expect(result.message).toBe('Missing email');
@@ -74,7 +67,7 @@ test('handling a request with valid missing credentials in body', done => {
 });
 
 test('handling a request with valid missing credentials in query', done => {
-  passport
+  testPassport
     .use(strategy)
     .fail(result => {
       expect(result.message).toBe('Missing email');
