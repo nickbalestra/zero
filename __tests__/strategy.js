@@ -1,11 +1,17 @@
 const Strategy = require('../lib/Strategy.js');
 const tokenStorage = require('../lib/tokenStorage');
 
+const deliver = {
+  addressField: 'email',
+  tokenField: 'token',
+  send() {}
+};
+
 test('should throw if constructed without a verify callback', () => {
   expect(() => {
     new Strategy({
       secret: 'top-secret',
-      deliver: {}
+      deliver
     });
   }).toThrowError('ZeroStrategy requires a verify callback');
 });
@@ -14,7 +20,7 @@ test('should throw if constructed without a secret', () => {
   expect(() => {
     new Strategy(
       {
-        deliver: {}
+        deliver
       },
       () => {}
     );
@@ -32,6 +38,18 @@ test('should throw if constructed without a deliver', () => {
   }).toThrowError('ZeroStrategy requires a deliver module');
 });
 
+test('should throw if constructed without a valid deliver', () => {
+  expect(() => {
+    new Strategy(
+      {
+        secret: 'top-secret',
+        deliver: {}
+      },
+      () => {}
+    );
+  }).toThrowError('ZeroStrategy requires a valid deliver module');
+});
+
 test('strategy defaults', () => {
   let stategy;
   const verify = () => {};
@@ -39,10 +57,7 @@ test('strategy defaults', () => {
     strategy = new Strategy(
       {
         secret: 'top-secret',
-        deliver: {
-          addressField: 'email',
-          tokenField: 'token'
-        }
+        deliver
       },
       verify
     );
