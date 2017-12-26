@@ -154,3 +154,16 @@ test('handling a request with revoked token (already used) in body', done => {
       /* defaults: action: 'acceptToken', allowReuse: false */
     });
 });
+
+test('handling uknkown authenticate action', done => {
+  testPassport
+    .use(strategy)
+    .error(error => {
+      expect(error.message).toBe('Unknown action');
+      done();
+    })
+    .req(req => {
+      req.body = {};
+    })
+    .authenticate({ action: 'unknown' });
+});
