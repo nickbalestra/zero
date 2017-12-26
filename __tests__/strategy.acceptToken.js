@@ -150,5 +150,7 @@ test('handling a request with revoked token (already used) in body', done => {
         token
       };
     })
-    .authenticate({ action: 'acceptToken' /* default: allowReuse: false */ });
+    .authenticate({
+      /* defaults: action: 'acceptToken', allowReuse: false */
+    });
 });
