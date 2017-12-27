@@ -1,6 +1,6 @@
 {
   "name": "passport-zero",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "zero password strategy for passport",
   "scripts": {
     "coverage": "codecov",
