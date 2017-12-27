@@ -34,7 +34,7 @@ $ npm install passport-zero
 The zero authentication strategy authenticates users via a one-time password token sent via email ot other means:
 
 ```js
-const { Strategy, email } = 'passport-zero';
+const { Strategy, email } = require('passport-zero');
 
 passport.use(
   new Strategy({              
