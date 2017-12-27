@@ -1,5 +1,5 @@
 {
-  "name": "zero",
+  "name": "passport-zero",
   "version": "0.0.1",
   "description": "zero password strategy for passport",
   "scripts": {
@@ -16,16 +16,16 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nickbalestra/feathers.git"
+    "url": "git+https://github.com/nickbalestra/zero.git"
   },
   "author": {
     "name": "Nick Balestra",
     "email": "nick@balestra.ch"
   },
   "bugs": {
-    "url": "https://github.com/nickbalestra/feathers/issues"
+    "url": "https://github.com/nickbalestra/zero/issues"
   },
-  "homepage": "https://github.com/nickbalestra/feathers#readme",
+  "homepage": "https://github.com/nickbalestra/zero#readme",
   "dependencies": {
     "emailjs": "^1.0.12",
     "jsonwebtoken": "^8.1.0",
