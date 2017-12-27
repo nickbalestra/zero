@@ -5,6 +5,7 @@ A [passwordless](https://github.com/florianheinemann/passwordless) inspired stra
 
 [![Build Status](https://travis-ci.org/nickbalestra/zero.svg?branch=master)](https://travis-ci.org/nickbalestra/zero)
 [![codecov](https://codecov.io/gh/nickbalestra/zero/branch/master/graph/badge.svg)](https://codecov.io/gh/nickbalestra/zero)
+[![npm version](https://badge.fury.io/js/passport-zero.svg)](http://badge.fury.io/js/passport-zero)
 
 This module allows authentication and authorization without passwords in your Node.js
 applications. It works by simply sending one-time password (OTPW) tokens via email (default) or other means. The module was inspired by @florianheinemann 's [passwordless project](https://github.com/florianheinemann/passwordless/). By plugging into Passport, zero authentication can be easily and unobtrusively integrated into any application or framework that supports [Connect](http://www.senchalabs.org/connect/)-style middleware, including [Express](http://expressjs.com/). 
