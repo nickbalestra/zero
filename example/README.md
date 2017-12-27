@@ -46,15 +46,15 @@ npm start
 
 ## Navigating the app
 
-### `/login`
+### [/login](http://localhost:3000/login)
 
 Visit [http://localhost:3000/login](http://localhost:3000/login) submit your email in the form (should be the same email you added to the records in the dummy db) and you should be redirected to `/login/message` with a confirmation message.
 
-### `Check your inbox`
+### Check your inbox
 You should have recived an email with a link, it will look something like `http://localhost:3000/?token=xxx`. Click it and you should be logged in (The app will redirect to your profile page `/profile`)
 
-### `/profile`
+### [/profile](http://localhost:3000/profile)
 Here you will be able to check your profile page. You won't be able to access this page while logged out.
 
-### `/logout`
+### [/logout](http://localhost:3000/logout)
 You will be logged out when hitting this route
