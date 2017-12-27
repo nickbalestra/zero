@@ -41,7 +41,7 @@ passport.use(
     secret,
     deliver: email(smtpConfig)                    
   },
-  verify
+  email => db.users.findByEmail(email)
 ))
 ```
 
