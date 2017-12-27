@@ -33,6 +33,7 @@ passport.use(
         // Or create a .env file with the following variables
         // For further information on smtp cofngurtion check https://github.com/eleith/emailjs
         user: process.env.smtpServerUser,
+        from: process.env.smtpServerFrom,
         password: process.env.smtpServerPassword,
         port: process.env.smtpServerPort,
         host: process.env.smtpServerHost,
