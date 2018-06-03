@@ -8,15 +8,15 @@
   },
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2",
     "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "express-session": "^1.15.6",
-    "express-es6-template-engine": "^2.0.2",
-    "morgan": "^1.9.0",
-    "dotenv": "^4.0.0",
-    "passport": "^0.4.0",
     "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "6.0.0",
+    "express": "^4.16.2",
+    "express-es6-template-engine": "^2.0.2",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
     "passport-zero": "file:../"
   }
 }
