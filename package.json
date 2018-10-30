@@ -9,10 +9,17 @@
     "test": "jest"
   },
   "lint-staged": {
-    "*.{js,json}": ["prettier --single-quote --write", "git add"]
+    "*.{js,json}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "license": "MIT",
-  "files": ["index.js", "lib", "Licence"],
+  "files": [
+    "index.js",
+    "lib",
+    "Licence"
+  ],
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -37,7 +44,7 @@
     "codecov": "^3.0.0",
     "husky": "^0.14.3",
     "jest": "^22.0.3",
-    "lint-staged": "^6.0.0",
+    "lint-staged": "8.0.3",
     "prettier": "^1.8.2"
   },
   "jest": {
